@@ -26,8 +26,18 @@ var EpravdaNews = new function(){
           currEl.style.display = 'none';
         }
 
-        if(currEl.tagName == 'CENTER' && currEl.children[0].id.indexOf('adriver') != -1){
-          currEl.style.display = 'none';
+        if(currEl.tagName == 'CENTER'){
+          var centerTag = currEl;
+          var centerTagChildren = centerTag.children;
+          var cntTagChLen = centerTagChildren.length;
+
+          for(var q=0; q<cntTagChLen; q++){
+            var cntTagCurrEl = centerTagChildren[q];
+
+            if(cntTagCurrEl.id.indexOf('adriver') != -1){
+              currEl.style.display = 'none';
+            }
+          }
         }
 
         if(currEl.id.indexOf('mwayss') != -1){
