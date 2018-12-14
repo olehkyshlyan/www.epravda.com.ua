@@ -13,106 +13,130 @@
 var EpravdaNews = new function(){
 
   this.body = function(){
-    var bodyChildrenInclosure = function(){
-      var bodyCollection = document.getElementsByTagName('body');
-      var body = bodyCollection[0];
-      var bodyChildren = body.children;
-      var bdChLen = bodyChildren.length;
+    var bodyInclosure = function(){
+      var body = document.body;
+        if(body != undefined){
+          body.style.backgroundColor = 'transparent';
+          body.style.backgroundImage = 'none';
+          body.style.backgroundRepeat = 'repeat';
+          body.style.backgroundAttachment = 'scroll';
+          body.style.backgroundPosition = '0% 0%';
+          body.style.paddingTop = '0px';
+          body.className = '';
 
-      for(var i=0; i<bdChLen; i++){
-        var currEl = bodyChildren[i];
+          var bodyChildren = body.children;
+          var bdChLen = bodyChildren.length;
 
-        if(currEl == bodyChildren[0] && currEl.tagName == 'BR'){
-          currEl.style.display = 'none';
-        }
+          for(var i=0; i<bdChLen; i++){
+            var bodyChild = bodyChildren[i];
 
-        if(currEl.tagName == 'CENTER'){
-          var centerTag = currEl;
-          var centerTagChildren = centerTag.children;
-          var cntTagChLen = centerTagChildren.length;
+            if(bodyChild.tagName == 'A' && bodyChild.id.indexOf('ar') == 0){
+              bodyChild.style.display = 'none';
+            }
 
-          for(var q=0; q<cntTagChLen; q++){
-            var cntTagCurrEl = centerTagChildren[q];
+            if(bodyChild == bodyChildren[0] && bodyChild.tagName == 'BR'){
+              bodyChild.style.display = 'none';
+            }
 
-            if(cntTagCurrEl.id.indexOf('adriver') != -1){
-              currEl.style.display = 'none';
+            if(bodyChild.tagName == 'CENTER'){
+              var center = bodyChild;
+              var centerChildren = center.children;
+              var cntChLen = centerChildren.length;
+
+              for(var q=0; q<cntChLen; q++){
+                var cntChild = centerChildren[q];
+
+                if(cntChild.id.indexOf('adriver') != -1){
+                  bodyChild.style.display = 'none';
+                }
+              }
+            }
+
+            if(bodyChild.className.indexOf('advtext') != -1){
+              bodyChild.style.display = 'none !important';
+            }
+
+            if(bodyChild.id.indexOf('mwayss') != -1){
+              bodyChild.style.display = 'none';
+            }
+
+            if(bodyChild.id.indexOf('adriver') != -1){
+              bodyChild.style.display = 'none';
+            }
+
+            if(bodyChild.tagName == 'IFRAME'){
+              bodyChild.style.display = 'none';
+            }
+
+            if(bodyChild.tagName == 'IMG'){
+              bodyChild.style.display = 'none';
             }
           }
         }
-
-        if(currEl.id.indexOf('mwayss') != -1){
-          currEl.style.display = 'none';
-        }
-
-        if(currEl.id.indexOf('adriver') != -1){
-          currEl.style.display = 'none';
-        }
-
-        if(currEl.tagName == 'IFRAME'){
-          currEl.style.display = 'none';
-        }
-
-        if(currEl.tagName == 'IMG'){
-          currEl.style.display = 'none';
-        }
-      }
     }
-    setTimeout(bodyChildrenInclosure,3000);
+    setTimeout(bodyInclosure,3000);
   }
 
   this.blockPost = function(){
-    var blockPostCollection = document.getElementsByClassName('block_post');
-    var blockPostZeroEl = blockPostCollection[0];
-    var blckPostZrElChildren = blockPostZeroEl.children;
-    var bkPstZrElChLen = blckPostZrElChildren.length;
+    var blockPostInclosure = function(){
+      var blockPostCollection = document.getElementsByClassName('block_post');
+      if(blockPostCollection.length > 0){
+        var blockPostZeroEl = blockPostCollection[0];
+        if(blockPostZeroEl != undefined){
+          var blckPostZrElChildren = blockPostZeroEl.children;
+          var bkPstZrElChLen = blckPostZrElChildren.length;
 
-    for(var i=0; i<bkPstZrElChLen; i++){
-      var currEl = blckPostZrElChildren[i];
+          for(var i=0; i<bkPstZrElChLen; i++){
+            var bkPstChild = blckPostZrElChildren[i];
 
-      if(currEl.className == 'post__service'){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.className == 'post__service'){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.className == 'column_description'){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.className == 'column_description'){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.className == 'push'){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.className == 'push'){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.id.indexOf('admixer') != -1){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.id.indexOf('admixer') != -1){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.tagName == 'RB'){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.tagName == 'BR'){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.tagName == 'IFRAME' && currEl.nextElementSibling.tagName == 'SPAN'){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.tagName == 'IFRAME' && bkPstChild.nextElementSibling.tagName == 'SPAN'){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.tagName == 'SPAN' && currEl.previousElementSibling.tagName == 'IFRAME'){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.tagName == 'SPAN' && bkPstChild.previousElementSibling.tagName == 'IFRAME'){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.className == 'unit_article-banner'){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.className == 'unit_article-banner'){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.className == 'empty'){
-        currEl.style.cssText += '; display: none !important;';
-      }
+            if(bkPstChild.className == 'empty'){
+              bkPstChild.style.cssText += '; display: none !important;';
+            }
 
-      if(currEl.className == 'block_comments'){
-        currEl.style.display = 'none';
-      }
+            if(bkPstChild.className == 'block_comments'){
+              bkPstChild.style.display = 'none';
+            }
 
-      if(currEl.className == 'block_other_stories'){
-        currEl.style.display = 'none';
+            if(bkPstChild.className == 'block_other_stories'){
+              bkPstChild.style.display = 'none';
+            }
+          }
+        }
       }
     }
+    setTimeout(blockPostInclosure,3000);
   }
 
   this.rightColumnAside = function(){
