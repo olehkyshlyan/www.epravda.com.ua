@@ -7,6 +7,7 @@
 // @author       oleh.kyshlyan
 // @match        http://www.epravda.com.ua/news/*
 // @match        https://www.epravda.com.ua/news/*
+// @require      https://code.jquery.com/jquery-3.3.1.min.js
 // @grant        none
 // ==/UserScript==
 
@@ -48,6 +49,16 @@ var EpravdaNews = new function(){
 
                 if(cntChild.id.indexOf('adriver') != -1){
                   bodyChild.style.display = 'none';
+                  break;
+                }
+
+                if(cntChild.tagName == 'DIV'){
+                  for(property of cntChild.children){
+                    if(property.tagName == 'SCRIPT' && property.src.indexOf('adnet') != -1){
+                      bodyChild.style.display = 'none';
+                      break;
+                    }
+                  }
                 }
               }
             }
@@ -171,6 +182,12 @@ var EpravdaNews = new function(){
 
         if(currEl.id == 'sticky-wrapper'){
           currEl.style.display = 'none';
+        }
+
+        if(currEl.tagName == 'CENTER'){
+          if(currEl.children[0].id == 'sticky-wrapper'){
+            currEl.style.display = 'none';
+          }
         }
       }
     }
