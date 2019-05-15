@@ -75,6 +75,10 @@ var EpravdaNews = new function(){
               bodyChild.style.display = 'none';
             }
 
+            if(bodyChild.className.indexOf('webpush') != -1){
+              bodyChild.style.display = 'none';
+            }
+
             if(bodyChild.tagName == 'IFRAME'){
               bodyChild.style.display = 'none';
             }
