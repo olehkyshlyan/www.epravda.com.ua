@@ -7,7 +7,7 @@
 // @author       oleh.kyshlyan
 // @match        http://www.epravda.com.ua/news/*
 // @match        https://www.epravda.com.ua/news/*
-// @require      https://code.jquery.com/jquery-3.3.1.min.js
+// @require      https://code.jquery.com/jquery-3.4.0.min.js
 // @grant        none
 // ==/UserScript==
 
@@ -25,66 +25,60 @@ var EpravdaNews = new function(){
           body.style.paddingTop = '0px';
           body.className = '';
 
-          var bodyChildren = body.children;
-          var bdChLen = bodyChildren.length;
-
-          for(var i=0; i<bdChLen; i++){
-            var bodyChild = bodyChildren[i];
-
-            if(bodyChild.tagName == 'A' && bodyChild.id.indexOf('ar') == 0){
-              bodyChild.style.display = 'none';
+          for(property of body.children){
+            if(property.tagName == 'A' && property.id.indexOf('ar') == 0){
+              property.style.display = 'none';
             }
 
-            if(bodyChild == bodyChildren[0] && bodyChild.tagName == 'BR'){
-              bodyChild.style.display = 'none';
+            if(property == body.children[0] && property.tagName == 'BR'){
+              property.style.display = 'none';
             }
 
-            if(bodyChild.tagName == 'CENTER'){
-              var center = bodyChild;
-              var centerChildren = center.children;
-              var cntChLen = centerChildren.length;
-
-              for(var q=0; q<cntChLen; q++){
-                var cntChild = centerChildren[q];
-
-                if(cntChild.id.indexOf('adriver') != -1){
-                  bodyChild.style.display = 'none';
-                  break;
+            if(property.tagName == 'CENTER'){
+              for(subproperty of property.children){
+                if(subproperty.id.indexOf('adriver') != -1){
+                  property.style.display = 'none';
                 }
 
-                if(cntChild.tagName == 'DIV'){
-                  for(property of cntChild.children){
-                    if(property.tagName == 'SCRIPT' && property.src.indexOf('adnet') != -1){
-                      bodyChild.style.display = 'none';
-                      break;
-                    }
+                if(subproperty.tagName == 'DIV'){
+                  var adnetSrc = jQuery(subproperty).find("SCRIPT[src*='adnet']");
+                  if(adnetSrc.length == 1){
+                    property.style.display = 'none';
                   }
                 }
               }
             }
 
-            if(bodyChild.className.indexOf('advtext') != -1){
-              bodyChild.style.display = 'none !important';
+            if(property.className.indexOf('advtext') != -1){
+              property.style.display = 'none !important';
             }
 
-            if(bodyChild.id.indexOf('mwayss') != -1){
-              bodyChild.style.display = 'none';
+            if(property.id.indexOf('mwayss') != -1){
+              property.style.display = 'none';
             }
 
-            if(bodyChild.id.indexOf('adriver') != -1){
-              bodyChild.style.display = 'none';
+            if(property.id.indexOf('adriver') != -1){
+              property.style.display = 'none';
             }
 
-            if(bodyChild.className.indexOf('webpush') != -1){
-              bodyChild.style.display = 'none';
+            if(property.className.indexOf('webpush') != -1){
+              property.style.display = 'none';
             }
 
-            if(bodyChild.tagName == 'IFRAME'){
-              bodyChild.style.display = 'none';
+            if(property.tagName == 'IFRAME'){
+              property.style.display = 'none';
             }
 
-            if(bodyChild.tagName == 'IMG'){
-              bodyChild.style.display = 'none';
+            if(property.tagName == 'IMG'){
+              property.style.display = 'none';
+            }
+
+            if(property.id == 'fb-root'){
+              property.style.display = 'none';
+            }
+
+            if(property.id.indexOf('ScriptRoot') != -1){
+              property.style.display = 'none';
             }
           }
         }
