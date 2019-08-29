@@ -17,6 +17,7 @@ var EpravdaСolumns = new function(){
     var bodyInclosure = function(){
       var body = document.body;
       if(body != undefined){
+        body.style.backgroundColor = 'transparent';
         body.style.backgroundImage = 'none';
         body.style.backgroundRepeat = 'repeat';
         body.style.backgroundAttachment = 'scroll';
@@ -170,6 +171,10 @@ var EpravdaСolumns = new function(){
               if(ifrRecreativ.length == 1){
                 element.style.display = 'none';
               }
+            }
+
+            if(element.id.indexOf('sticky-wrapper') != -1){
+              element.style.display = 'none';
             }
           });
         }
